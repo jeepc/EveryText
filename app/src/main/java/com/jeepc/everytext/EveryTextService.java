@@ -1,5 +1,6 @@
 package com.jeepc.everytext;
 
+import android.accessibilityservice.AccessibilityService;
 import android.annotation.TargetApi;
 import android.app.Service;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.view.accessibility.AccessibilityEvent;
 
 
 import java.util.Timer;
@@ -18,7 +20,7 @@ import java.util.TimerTask;
  * @author SJL
  * @date 2016/11/30 21:35
  */
-public class FloatWindowService extends Service {
+public class EveryTextService extends AccessibilityService {
     private Context context;
 
     private Timer timer;
@@ -92,9 +94,15 @@ public class FloatWindowService extends Service {
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public void onAccessibilityEvent(AccessibilityEvent event) {
+
     }
+
+    @Override
+    public void onInterrupt() {
+
+    }
+
 
     @Override
     public void onDestroy() {

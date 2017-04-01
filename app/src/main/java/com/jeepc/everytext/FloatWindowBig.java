@@ -86,7 +86,7 @@ public class FloatWindowBig extends LinearLayout {
                 //关闭所有悬浮窗
                 FloatWindowManager.getInstance(context).closeAllFloatWindow();
                 //停止服务
-                context.stopService(new Intent(context, FloatWindowService.class));
+                context.stopService(new Intent(context, EveryTextService.class));
             }
         });
     }

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.jeepc.everytext">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions"/>
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"/>
 
     <application
         android:name=".EveryTextApp"
@@ -21,10 +24,18 @@
         </activity>
 
         <service
-            android:name=".FloatWindowService"
+            android:name=".EveryTextService"
             android:enabled="true"
-            android:exported="true">
-
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:accessibilityEventTypes="typeNotificationStateChanged|typeWindowStateChanged|typeWindowContentChanged"
+            android:accessibilityFeedbackType="feedbackGeneric"
+            android:accessibilityFlags="flagDefault"
+            android:canRetrieveWindowContent="true"
+            android:notificationTimeout="100">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
         </service>
     </application>
 

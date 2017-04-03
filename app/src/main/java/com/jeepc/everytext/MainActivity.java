@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initActionBar();
         initView();
-        Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+       /* Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
     public void initActionBar() {
@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    FloatWindowManager.getInstance(MainActivity.this).showFloatWindowSmall();
+                    FloatWindowManager.getInstance().showFloatWindow();
                 }else {
-                    FloatWindowManager.getInstance(MainActivity.this).closeFloatWindowSmall();
+                    FloatWindowManager.getInstance().closeFloatWindow();
                 }
             }
         });

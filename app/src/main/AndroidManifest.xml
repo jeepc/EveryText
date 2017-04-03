@@ -27,15 +27,13 @@
             android:name=".EveryTextService"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
-            android:accessibilityEventTypes="typeNotificationStateChanged|typeWindowStateChanged|typeWindowContentChanged"
-            android:accessibilityFeedbackType="feedbackGeneric"
-            android:accessibilityFlags="flagDefault"
-            android:canRetrieveWindowContent="true"
-            android:notificationTimeout="100">
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService"/>
             </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility"/>
         </service>
     </application>
 

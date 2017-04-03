@@ -4,133 +4,57 @@ import android.content.Context;
 import android.view.WindowManager;
 
 
-/**
- * 悬浮窗管理
- *
- * @author SJL
- * @date 2016/11/30 21:34
- */
 public class FloatWindowManager {
     private static FloatWindowManager floatWindowManager;
 
     private static WindowManager windowManager;
 
-    private Context context;
 
-    public static FloatWindowManager getInstance(Context context) {
+    public static FloatWindowManager getInstance() {
         if (floatWindowManager == null) {
-            floatWindowManager = new FloatWindowManager(context);
+            floatWindowManager = new FloatWindowManager();
         }
         return floatWindowManager;
     }
 
-    public FloatWindowManager(Context context) {
-        this.context = context;
+    protected FloatWindowManager() {
     }
 
-    private FloatWindowSmall floatWindowSmall;
+    private TextFloatWindow mTextFW;
 
-    /**
-     * 显示小悬浮窗
-     *
-     */
-    public void showFloatWindowSmall() {
-        if (floatWindowSmall == null) {
-            floatWindowSmall = new FloatWindowSmall(context);
+
+    public void showFloatWindow() {
+        if (mTextFW == null) {
+            mTextFW = new TextFloatWindow(EveryTextApp.getContext());
 
         }
-        //floatWindowManager = new FloatWindowManager(context);
-        getWindowManager().addView(floatWindowSmall, floatWindowSmall.layoutParams);
+        getWindowManager().addView(mTextFW, mTextFW.layoutParams);
     }
 
-    /**
-     * 更新小悬浮窗
-     */
-    public void updateFloatWindowSmall() {
-        if (floatWindowSmall != null) {
-            floatWindowSmall.update();
+
+    public void updateFloatWindow() {
+        if (mTextFW != null) {
+            mTextFW.update();
         }
     }
 
-    /**
-     * 关闭小悬浮窗
-     */
-    public void closeFloatWindowSmall() {
-        if (floatWindowSmall != null) {
-            getWindowManager().removeView(floatWindowSmall);
-            floatWindowSmall = null;
+
+    public void closeFloatWindow() {
+        if (mTextFW != null) {
+            getWindowManager().removeView(mTextFW);
+            mTextFW = null;
         }
     }
 
-    private FloatWindowBig floatWindowBig;
 
-    /**
-     * 显示大悬浮窗
-     *
-     */
-    public void showFloatWindowBig() {
-        if (floatWindowBig == null) {
-            floatWindowBig = new FloatWindowBig(context);
-        }
-        getWindowManager().addView(floatWindowBig, floatWindowBig.layoutParams);
-    }
-
-    /**
-     * 关闭大悬浮窗
-     */
-    public void closeFloatWindowBig() {
-        if (floatWindowBig != null) {
-            getWindowManager().removeView(floatWindowBig);
-            floatWindowBig = null;
-        }
-    }
-
-    private FloatWindowProgress floatWindowProgress;
-
-    /**
-     * 显示进度条悬浮窗
-     *
-     * @param context
-     */
-    public void showFloatWindowProgress(Context context) {
-        if (floatWindowProgress == null) {
-            floatWindowProgress = new FloatWindowProgress(context);
-            this.context = context;
-        }
-
-        getWindowManager().addView(floatWindowProgress, floatWindowProgress.layoutParams);
-    }
-
-    /**
-     * 关闭进度条悬浮窗
-     */
-    public void closeFloatWindowProgress(){
-        if(floatWindowProgress!=null){
-            getWindowManager().removeView(floatWindowProgress);
-            floatWindowProgress = null;
-        }
-    }
-
-    /**
-     * 悬浮窗是否显示
-     * @return
-     */
     public boolean isFloatWindowShowing() {
-        return floatWindowBig != null || floatWindowSmall != null || floatWindowProgress != null;
+        return mTextFW != null;
     }
 
-    /**
-     * 关闭所有悬浮窗
-     */
-    public void closeAllFloatWindow() {
-        closeFloatWindowSmall();
-        closeFloatWindowBig();
-        closeFloatWindowProgress();
-    }
 
     private WindowManager getWindowManager() {
         if (windowManager == null) {
-            windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            windowManager = (WindowManager) EveryTextApp.getContext().getSystemService(Context.WINDOW_SERVICE);
         }
         return windowManager;
     }
